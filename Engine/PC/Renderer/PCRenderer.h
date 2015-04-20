@@ -83,4 +83,6 @@ public:
      * The last method that should be called.
      */
     void terminate() override;
+
+    PCRenderer();
 };

@@ -126,3 +126,8 @@ void PCRenderer::errorCallback(int error, const char* description)
 {
     std::cerr << "Error from GLFW: "<< error << " " << description << std::endl;
 }
+
+PCRenderer::PCRenderer()
+{
+
+}

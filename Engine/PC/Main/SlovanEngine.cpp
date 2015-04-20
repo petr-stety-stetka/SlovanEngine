@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../../MyGame/PC/Main.h"
+#include "../../../Game/PC/Main.h"
 
 using namespace std;
 
