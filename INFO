@@ -1,0 +1,4 @@
+In directory Core is shared source for all platforms (Android, PC).
+In Android is specified code for Android.
+In PC is specified code for PC too.
+And in ForUse is code (only .h) for use in Game/App as user (gameDev) (and for inter use in Engine (EngineDev) too).
