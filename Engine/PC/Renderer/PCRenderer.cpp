@@ -4,19 +4,43 @@
 #include <thread>
 
 GLFWwindow* PCRenderer::window;
+short Renderer::UPSandIPS(60);
 
 void PCRenderer::inputLoop()
 {
+    using namespace std::chrono;
+
+    FPSLogger IPSLogger;
+    nanoseconds::rep nsPerFrame(1000000000 / UPSandIPS);
+
     while(runGameLoop && !glfwWindowShouldClose(window))
+    {
+        nanoseconds::rep startTime = getActualTimeInNs();
+
         actualScene->input();
+
+        nanoseconds::rep endTime = getActualTimeInNs();
+
+        nanoseconds::rep updateTime = endTime - startTime;
+        nanoseconds::rep sleepTime = nsPerFrame - updateTime;
+
+        nanoseconds::rep nextFrame = startTime + nsPerFrame;
+
+        while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
+        {
+            std::this_thread::sleep_for(nanoseconds(sleepTime / 100));
+        }
+
+        IPSLogger.logFrame("IPS");
+    }
 }
 
 void PCRenderer::updateLoop()
 {
     using namespace std::chrono;
 
-    //TODO: 2. version 30 UPS and 60 UPS
     FPSLogger UPSLogger;
+    nanoseconds::rep nsPerFrame(1000000000 / UPSandIPS);
 
     while(runGameLoop && !glfwWindowShouldClose(window))
     {
@@ -27,19 +51,14 @@ void PCRenderer::updateLoop()
         nanoseconds::rep endTime = getActualTimeInNs();
 
         nanoseconds::rep updateTime = endTime - startTime;
-        nanoseconds::rep sleepTime = 16666666 - updateTime; //+- 60 UPS
+        nanoseconds::rep sleepTime = nsPerFrame - updateTime;
 
-        nanoseconds::rep nextFrame = startTime + 16666666;
+        nanoseconds::rep nextFrame = startTime + nsPerFrame;
 
         while(sleepTime > 0 && getActualTimeInNs() + (sleepTime/100) < nextFrame)
         {
             std::this_thread::sleep_for(nanoseconds(sleepTime/100));
         }
-        /* Or this
-        if(sleepTime > 0)
-        {
-            std::this_thread::sleep_for(std::chrono::nanoseconds(sleepTime));
-        }*/
 
         UPSLogger.logFrame("UPS");
     }
@@ -54,6 +73,7 @@ std::chrono::nanoseconds::rep PCRenderer::getActualTimeInNs()
 
 void PCRenderer::drawLoop()
 {
+    FPSLogger FPSLogger;
     int width, height;
     while(runGameLoop && !glfwWindowShouldClose(window))
     {
@@ -66,6 +86,8 @@ void PCRenderer::drawLoop()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        FPSLogger.logFrame("FPS");
     }
 }
 

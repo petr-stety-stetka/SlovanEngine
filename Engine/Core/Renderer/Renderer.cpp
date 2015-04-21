@@ -2,7 +2,7 @@
 
 Scene* Renderer::actualScene = nullptr;
 
-bool Renderer::runGameLoop = true;
+bool Renderer::runGameLoop(true);
 
 void Renderer::setFirstScene(Scene* scene)
 {

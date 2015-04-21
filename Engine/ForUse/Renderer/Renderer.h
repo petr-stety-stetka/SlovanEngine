@@ -6,15 +6,14 @@ class Renderer
 {
 protected:
 
-    /**
-     * Actual scene.
-     */
+    /** Actual scene. */
     static Scene* actualScene;
 
-    /**
-     * Can run game loop.
-     */
+    /** Can run game loop. */
     static bool runGameLoop;
+
+    /** Updates (and input) per second. **/
+    static short UPSandIPS;
 
 public:
     /**

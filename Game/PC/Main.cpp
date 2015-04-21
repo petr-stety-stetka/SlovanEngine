@@ -6,7 +6,7 @@ void Main::main(int argc, std::string argv[])
 {
 	PCRenderer renderer;
 	renderer.initialization();
-	renderer.createWindow("My Engine", 640, 480, 1);
+	renderer.createWindow("Slovan Engine", 640, 480, 1);
 
 	Scene *firstScene = new Scene0;
 
