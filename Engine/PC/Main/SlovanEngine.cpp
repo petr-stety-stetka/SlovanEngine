@@ -8,9 +8,9 @@ using namespace std;
  */
 int main(int argc, char *argv[])
 {
-    string sArgv[argc];
+    vector<string> sArgv;
     for(int i = 0; i < argc; i++)
-        sArgv[i] = argv[i];
+        sArgv.push_back(argv[i]);
 
     Main main;
     main.main(argc, sArgv);

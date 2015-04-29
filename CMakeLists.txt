@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(Game)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lGL -lGLU -lglfw -lX11 -lXxf86vm -lXrandr -lpthread -lXi -DPC")
+add_definitions(-DPC)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -lGL -lGLU -lglfw -lX11 -lXxf86vm -lXrandr -lpthread -lXi")
 
 set(SOURCE_FILES
 Engine/PC/Main/SlovanEngine.cpp

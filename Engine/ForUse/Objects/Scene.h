@@ -16,4 +16,6 @@ public:
 
     /** Function for update game states and physics */
     virtual void update() = 0;
+
+    virtual ~Scene() {};
 };

@@ -47,6 +47,8 @@ private:
      */
     static std::chrono::nanoseconds::rep getActualTimeInNs();
 
+    void setLatestVersionOfOpenGL();
+
 public:
 
     /**

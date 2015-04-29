@@ -2,7 +2,7 @@
 #include "../Scene/Scene0/Scene0.h"
 #include "../../Engine/PC/Renderer/PCRenderer.h"
 
-void Main::main(int argc, std::string argv[])
+void Main::main(int argc, std::vector <std::string> argv)
 {
 	PCRenderer renderer;
 	renderer.initialization();

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <thread>
 
+#define ONE_NANOSECOND 1000000000
+
 GLFWwindow* PCRenderer::window;
 short Renderer::UPSandIPS(60);
 
@@ -11,7 +13,7 @@ void PCRenderer::inputLoop()
     using namespace std::chrono;
 
     FPSLogger IPSLogger;
-    nanoseconds::rep nsPerFrame(1000000000 / UPSandIPS);
+    nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
 
     while(runGameLoop && !glfwWindowShouldClose(window))
     {
@@ -40,7 +42,7 @@ void PCRenderer::updateLoop()
     using namespace std::chrono;
 
     FPSLogger UPSLogger;
-    nanoseconds::rep nsPerFrame(1000000000 / UPSandIPS);
+    nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
 
     while(runGameLoop && !glfwWindowShouldClose(window))
     {
@@ -103,14 +105,26 @@ void PCRenderer::initialization()
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)
 {
+    setLatestVersionOfOpenGL();
+
     window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
     setWindow(title, swapInterval);
 }
 
 void PCRenderer::createWindow(std::string title, int swapInterval)
 {
+    setLatestVersionOfOpenGL();
+
     window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
     setWindow(title, swapInterval);
+}
+
+void PCRenderer::setLatestVersionOfOpenGL()
+{
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
 void PCRenderer::setWindow(std::string title, int swapInterval)
