@@ -37,9 +37,9 @@ private:
     static void updateLoop();
 
     /**
-     * Draw loop for render. Only here you can call OpenGL functions!
+     * render loop for draw. Only here you can call OpenGL functions!
      */
-    static void drawLoop();
+    static void renderLoop();
 
 
     /**

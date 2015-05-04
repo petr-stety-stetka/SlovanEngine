@@ -3,14 +3,9 @@
 #include "../../../Engine/ForUse/Renderer/Renderer.h"
 #include "../../../Engine/ForUse/GL/GLHeader.h"
 
-void Scene0::draw2D()
+void Scene0::render()
 {
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-}
-
-void Scene0::draw3D()
-{
-
 }
 
 void Scene0::input()

@@ -5,9 +5,7 @@
 class Scene0 : public Scene
 {
 public:
-	void draw2D() override;
-
-	void draw3D() override;
+	void render() override;
 
 	void input() override;
 

@@ -73,7 +73,7 @@ std::chrono::nanoseconds::rep PCRenderer::getActualTimeInNs()
 }
 
 
-void PCRenderer::drawLoop()
+void PCRenderer::renderLoop()
 {
     FPSLogger FPSLogger;
     int width, height;
@@ -83,8 +83,7 @@ void PCRenderer::drawLoop()
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        actualScene->draw2D();
-        actualScene->draw3D();
+        actualScene->render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -145,7 +144,7 @@ void PCRenderer::runLoop()
     std::thread tInput(inputLoop);
     std::thread tUpdate(updateLoop);
 
-    drawLoop();
+    renderLoop();
 
     tInput.join();
     tUpdate.join();
