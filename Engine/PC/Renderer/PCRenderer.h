@@ -1,5 +1,6 @@
 #pragma once
-#include <GLFW/glfw3.h>
+
+#include "../../ForUse/GL/GLHeader.h"
 #include <string>
 #include <chrono>
 #include "../../ForUse/Renderer/Renderer.h"
@@ -47,7 +48,7 @@ private:
      */
     static std::chrono::nanoseconds::rep getActualTimeInNs();
 
-    void setLatestVersionOfOpenGL();
+    void setVersionOpenGLOnOSX();
 
 public:
 

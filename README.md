@@ -10,5 +10,6 @@ cmake CMakeLists.txt
 ##License
 Engine is under GNU GPLv3 license.
 
-##Used library
+##Used library (thanks)
  - GLFW
+ - GLEW

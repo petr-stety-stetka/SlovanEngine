@@ -1,7 +1,9 @@
 #include "PCRenderer.h"
 #include "../../ForUse/Loggers/FPSLogger.h"
+#include "../../ForUse/Loggers/Logger.h"
 #include <iostream>
 #include <thread>
+#include <sstream>
 
 #define ONE_NANOSECOND 1000000000
 
@@ -104,7 +106,7 @@ void PCRenderer::initialization()
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)
 {
-    setLatestVersionOfOpenGL();
+    setVersionOpenGLOnOSX();
 
     window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
     setWindow(title, swapInterval);
@@ -112,18 +114,20 @@ void PCRenderer::createWindow(std::string title, int width, int height, int swap
 
 void PCRenderer::createWindow(std::string title, int swapInterval)
 {
-    setLatestVersionOfOpenGL();
+    setVersionOpenGLOnOSX();
 
     window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
     setWindow(title, swapInterval);
 }
 
-void PCRenderer::setLatestVersionOfOpenGL()
+void PCRenderer::setVersionOpenGLOnOSX()
 {
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#if defined(OS_X)
+    	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+   		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    #endif
 }
 
 void PCRenderer::setWindow(std::string title, int swapInterval)
@@ -136,6 +140,16 @@ void PCRenderer::setWindow(std::string title, int swapInterval)
 
     glfwSetWindowTitle(window, title.c_str());
     glfwMakeContextCurrent(window);
+
+    glewExperimental = GL_TRUE;
+    glewInit();
+
+    std::stringstream renderer, version;
+    renderer << glGetString(GL_RENDERER); // Get info about renderer
+    version << glGetString(GL_VERSION); // Get info about OpenGL version
+    Logger::printInfo("OpenGL renderer: " + renderer.str());
+    Logger::printInfo("OpenGL version suppored: " + version.str());
+
     glfwSwapInterval(swapInterval);
 }
 
