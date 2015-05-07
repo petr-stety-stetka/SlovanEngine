@@ -1,4 +1,4 @@
-#include "../../ForUse/Geometry/Point2D.h"
+#include "Point2D.h"
 
 Point2D::Point2D(float x, float y) : x(x), y(y)
 { }

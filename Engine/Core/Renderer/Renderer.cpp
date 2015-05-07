@@ -1,4 +1,4 @@
-#include "../../ForUse/Renderer/Renderer.h"
+#include "Renderer.h"
 
 Scene* Renderer::actualScene = nullptr;
 

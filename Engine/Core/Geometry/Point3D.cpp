@@ -1,4 +1,4 @@
-#include "../../ForUse/Geometry/Point3D.h"
+#include "Point3D.h"
 
 Point3D::Point3D(float x, float y, float z) : x(x), y(y), z(z)
 { }

@@ -1,5 +1,5 @@
-#include "../../ForUse/Loggers/FPSLogger.h"
-#include "../../ForUse/Loggers/Logger.h"
+#include "FPSLogger.h"
+#include "Logger.h"
 #define ONE_NANOSECOND 1000000000
 
 std::chrono::nanoseconds::rep FPSLogger::getActualTimeInNs()

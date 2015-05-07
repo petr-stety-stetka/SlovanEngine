@@ -1,6 +1,6 @@
 #include "PCRenderer.h"
-#include "../../ForUse/Loggers/FPSLogger.h"
-#include "../../ForUse/Loggers/Logger.h"
+#include "../../Core/Loggers/FPSLogger.h"
+#include "../../Core/Loggers/Logger.h"
 #include <iostream>
 #include <thread>
 #include <sstream>

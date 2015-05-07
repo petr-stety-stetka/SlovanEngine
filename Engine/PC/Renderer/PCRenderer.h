@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../ForUse/GL/GLHeader.h"
+#include "../../Core/GL/GLHeader.h"
 #include <string>
 #include <chrono>
-#include "../../ForUse/Renderer/Renderer.h"
+#include "../../Core/Renderer/Renderer.h"
 
 class PCRenderer : public Renderer
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Engine/ForUse/Objects/Scene.h"
+#include "../../../Engine/Core/Scene/Scene.h"
 
 
 class Scene1 : public Scene

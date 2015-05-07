@@ -7,14 +7,15 @@ add_definitions(-DADDITIONAL_LOG)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pthread")
 
 set(SOURCE_FILES
-Engine/PC/Main/SlovanEngine.cpp
-Engine/PC/Renderer/PCRenderer.cpp
 Engine/Core/Renderer/Renderer.cpp
-Engine/PC/Loggers/Logger.cpp
 Engine/Core/Loggers/FPSLogger.cpp
 Engine/Core/Geometry/Vector.cpp
 Engine/Core/Geometry/Point2D.cpp
 Engine/Core/Geometry/Point3D.cpp
+Engine/Core/Shader/Shader.cpp
+Engine/PC/Main/SlovanEngine.cpp
+Engine/PC/Renderer/PCRenderer.cpp
+Engine/PC/Loggers/Logger.cpp
 Game/PC/Main.cpp
 Game/Scene/Scene0/Scene0.cpp
 Game/Scene/Scene1/Scene1.cpp)

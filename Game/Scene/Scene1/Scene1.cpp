@@ -1,5 +1,5 @@
 #include "Scene1.h"
-#include "../../../Engine/ForUse/GL/GLHeader.h"
+#include "../../../Engine/Core/GL/GLHeader.h"
 
 void Scene1::render()
 {

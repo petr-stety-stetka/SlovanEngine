@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../ForUse/Objects/Scene.h"
+#include "../Scene/Scene.h"
 
 class Renderer
 {
