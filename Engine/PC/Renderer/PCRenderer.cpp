@@ -7,117 +7,117 @@
 
 #define ONE_NANOSECOND 1000000000
 
-GLFWwindow* PCRenderer::window;
+GLFWwindow *PCRenderer::window;
 short Renderer::UPSandIPS(60);
 
 void PCRenderer::inputLoop()
 {
-    using namespace std::chrono;
+	using namespace std::chrono;
 
-    FPSLogger IPSLogger;
-    nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
+	FPSLogger IPSLogger;
+	nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
 
-    while(runGameLoop && !glfwWindowShouldClose(window))
-    {
-        nanoseconds::rep startTime = getActualTimeInNs();
+	while(runGameLoop && !glfwWindowShouldClose(window))
+	{
+		nanoseconds::rep startTime = getActualTimeInNs();
 
-        actualScene->input();
+		actualScene->input();
 
-        nanoseconds::rep endTime = getActualTimeInNs();
+		nanoseconds::rep endTime = getActualTimeInNs();
 
-        nanoseconds::rep updateTime = endTime - startTime;
-        nanoseconds::rep sleepTime = nsPerFrame - updateTime;
+		nanoseconds::rep updateTime = endTime - startTime;
+		nanoseconds::rep sleepTime = nsPerFrame - updateTime;
 
-        nanoseconds::rep nextFrame = startTime + nsPerFrame;
+		nanoseconds::rep nextFrame = startTime + nsPerFrame;
 
-        while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
-        {
-            std::this_thread::sleep_for(nanoseconds(sleepTime / 100));
-        }
+		while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
+		{
+			std::this_thread::sleep_for(nanoseconds(sleepTime / 100));
+		}
 
-        IPSLogger.logFrame("IPS");
-    }
+		IPSLogger.logFrame("IPS");
+	}
 }
 
 void PCRenderer::updateLoop()
 {
-    using namespace std::chrono;
+	using namespace std::chrono;
 
-    FPSLogger UPSLogger;
-    nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
+	FPSLogger UPSLogger;
+	nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
 
-    while(runGameLoop && !glfwWindowShouldClose(window))
-    {
-        nanoseconds::rep startTime = getActualTimeInNs();
+	while(runGameLoop && !glfwWindowShouldClose(window))
+	{
+		nanoseconds::rep startTime = getActualTimeInNs();
 
-        actualScene->update();
+		actualScene->update();
 
-        nanoseconds::rep endTime = getActualTimeInNs();
+		nanoseconds::rep endTime = getActualTimeInNs();
 
-        nanoseconds::rep updateTime = endTime - startTime;
-        nanoseconds::rep sleepTime = nsPerFrame - updateTime;
+		nanoseconds::rep updateTime = endTime - startTime;
+		nanoseconds::rep sleepTime = nsPerFrame - updateTime;
 
-        nanoseconds::rep nextFrame = startTime + nsPerFrame;
+		nanoseconds::rep nextFrame = startTime + nsPerFrame;
 
-        while(sleepTime > 0 && getActualTimeInNs() + (sleepTime/100) < nextFrame)
-        {
-            std::this_thread::sleep_for(nanoseconds(sleepTime/100));
-        }
+		while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
+		{
+			std::this_thread::sleep_for(nanoseconds(sleepTime / 100));
+		}
 
-        UPSLogger.logFrame("UPS");
-    }
+		UPSLogger.logFrame("UPS");
+	}
 }
 
 std::chrono::nanoseconds::rep PCRenderer::getActualTimeInNs()
 {
-    using namespace std::chrono;
-    return duration_cast <nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
+	using namespace std::chrono;
+	return duration_cast <nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
 }
 
 
 void PCRenderer::renderLoop()
 {
-    FPSLogger FPSLogger;
-    int width, height;
-    while(runGameLoop && !glfwWindowShouldClose(window))
-    {
-        glfwGetFramebufferSize(window, &width, &height);
-        glViewport(0, 0, width, height);
-        glClear(GL_COLOR_BUFFER_BIT);
+	FPSLogger FPSLogger;
+	int width, height;
+	while(runGameLoop && !glfwWindowShouldClose(window))
+	{
+		glfwGetFramebufferSize(window, &width, &height);
+		glViewport(0, 0, width, height);
+		glClear(GL_COLOR_BUFFER_BIT);
 
-        actualScene->render();
+		actualScene->render();
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 
-        FPSLogger.logFrame("FPS");
-    }
+		FPSLogger.logFrame("FPS");
+	}
 }
 
 void PCRenderer::initialization()
 {
-    glfwSetErrorCallback(errorCallback);
+	glfwSetErrorCallback(errorCallback);
 
-    if (!glfwInit())
-    {
-        exit(EXIT_FAILURE);
-    }
+	if(!glfwInit())
+	{
+		exit(EXIT_FAILURE);
+	}
 }
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)
 {
-    setVersionOpenGLOnOSX();
+	setVersionOpenGLOnOSX();
 
-    window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-    setWindow(title, swapInterval);
+	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+	setWindow(title, swapInterval);
 }
 
 void PCRenderer::createWindow(std::string title, int swapInterval)
 {
-    setVersionOpenGLOnOSX();
+	setVersionOpenGLOnOSX();
 
-    window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
-    setWindow(title, swapInterval);
+	window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
+	setWindow(title, swapInterval);
 }
 
 void PCRenderer::setVersionOpenGLOnOSX()
@@ -132,48 +132,48 @@ void PCRenderer::setVersionOpenGLOnOSX()
 
 void PCRenderer::setWindow(std::string title, int swapInterval)
 {
-    if (!window)
-    {
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
+	if(!window)
+	{
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
 
-    glfwSetWindowTitle(window, title.c_str());
-    glfwMakeContextCurrent(window);
+	glfwSetWindowTitle(window, title.c_str());
+	glfwMakeContextCurrent(window);
 
-    glewExperimental = GL_TRUE;
-    glewInit();
+	glewExperimental = GL_TRUE;
+	glewInit();
 
-    std::stringstream renderer, version;
-    renderer << glGetString(GL_RENDERER); // Get info about renderer
-    version << glGetString(GL_VERSION); // Get info about OpenGL version
-    Logger::printInfo("OpenGL renderer: " + renderer.str());
-    Logger::printInfo("OpenGL version suppored: " + version.str());
+	std::stringstream renderer, version;
+	renderer << glGetString(GL_RENDERER); // Get info about renderer
+	version << glGetString(GL_VERSION); // Get info about OpenGL version
+	Logger::printInfo("OpenGL renderer: " + renderer.str());
+	Logger::printInfo("OpenGL version suppored: " + version.str());
 
-    glfwSwapInterval(swapInterval);
+	glfwSwapInterval(swapInterval);
 }
 
 void PCRenderer::runLoop()
 {
-    std::thread tInput(inputLoop);
-    std::thread tUpdate(updateLoop);
+	std::thread tInput(inputLoop);
+	std::thread tUpdate(updateLoop);
 
-    renderLoop();
+	renderLoop();
 
-    tInput.join();
-    tUpdate.join();
+	tInput.join();
+	tUpdate.join();
 }
 
 void PCRenderer::terminate()
 {
-    delete actualScene;
-    glfwDestroyWindow(window);
-    glfwTerminate();
+	delete actualScene;
+	glfwDestroyWindow(window);
+	glfwTerminate();
 }
 
-void PCRenderer::errorCallback(int error, const char* description)
+void PCRenderer::errorCallback(int error, const char *description)
 {
-    std::cerr << "Error from GLFW: "<< error << " " << description << std::endl;
+	std::cerr << "Error from GLFW: " << error << " " << description << std::endl;
 }
 
 PCRenderer::PCRenderer()
