@@ -6,7 +6,8 @@ It is still at an early stage of development and knoweth nothing :D
 
 ##Compilation
 cmake SlovanEngine<br>
-make
+make<br>
+sudo make install
 
 ##License
 Engine is under GNU GPLv3 license.
