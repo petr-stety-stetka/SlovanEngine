@@ -22,6 +22,8 @@ add_library(slovanEngine STATIC ${SOURCE_FILES})
 
 target_link_libraries(slovanEngine ${LIBRARIES})
 
+add_subdirectory(demo)
+
 #install libslovanEngine.a
 install(TARGETS slovanEngine DESTINATION "lib")
 

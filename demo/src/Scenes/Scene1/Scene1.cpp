@@ -1,3 +1,5 @@
+#include "Scene1.h"
+
 Scene1::Scene1() : triangleVertexData {0.0f, 0.0f, 0.0f, -0.8f, -0.8f, 0.0f, 0.8f, -0.8f, 0.0f},
                    planeVertexData {-0.9f, 0.9f, 0.0f, -0.9f, 0.3f, 0.0f, 0.9f, 0.9f, 0.0f,
                                     0.9f, 0.9f, 0.0f, -0.9f, 0.3f, 0.0f, 0.9f, 0.3f, 0.0f},

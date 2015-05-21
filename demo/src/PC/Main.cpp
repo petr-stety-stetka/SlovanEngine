@@ -1,3 +1,6 @@
+#include "../Scenes/Scene0/Scene0.h"
+#include <SlovanEngine/PC/Renderer/PCRenderer.h>
+
 int main(int argc, char *argv[])
 {
 	PCRenderer renderer;
