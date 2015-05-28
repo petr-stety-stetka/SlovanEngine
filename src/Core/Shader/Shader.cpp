@@ -40,11 +40,11 @@ std::string Shader::loadShaderSourceCode(std::string file)
 GLuint Shader::createShaderProgram(std::string vertexShaderCode, std::string fragmentShaderCode)
 {
 #if defined(PC)
-	vertexShaderCode = "#version 120\n" + vertexShaderCode;
-	fragmentShaderCode = "#version 120\n" + fragmentShaderCode;
+	vertexShaderCode = "#version 330\n" + vertexShaderCode;
+	fragmentShaderCode = "#version 330\n" + fragmentShaderCode;
 #elif defined(ANDROID)
-        vertexShaderCode = "#version 100\n" + vertexShaderCode;
-        fragmentShaderCode = "#version 100\n" + "precision mediump float;\n" + fragmentShaderCode;
+        vertexShaderCode = "#version 300 es\n" + vertexShaderCode;
+        fragmentShaderCode = "#version 300 es\n" + fragmentShaderCode;
 #endif
 
 	GLuint vertexShaderID = compileShader(GL_VERTEX_SHADER, vertexShaderCode);

@@ -15,14 +15,15 @@ void TestProgram::draw(GLuint VAOID, int verticesCount)
 
 void TestProgram::compile()
 {
-	std::string vertexShaderCode("attribute vec3 vert;\n"
+	std::string vertexShaderCode("in vec3 vert;\n"
 			                             "void main()\n"
 			                             "{\n"
 			                             "   gl_Position = vec4(vert.x, vert.y, vert.z, 1.0);\n"
 			                             "}");
-	std::string fragmentShaderCode("void main()\n"
+	std::string fragmentShaderCode("out vec4 fragmentColor;\n"
+			                               "void main()\n"
 			                               "{\n"
-			                               "   gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+			                               "   fragmentColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
 			                               "}");
 
 	programID = Shader::createShaderProgram(vertexShaderCode, fragmentShaderCode);

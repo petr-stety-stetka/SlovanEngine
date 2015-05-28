@@ -49,8 +49,8 @@ private:
 	static std::chrono::nanoseconds::rep getActualTimeInNs();
 
 
-	/** Set the highest version OpenGL on OS X */
-	void setVersionOpenGLOnOSX();
+	/** Set the required version of OpenGL*/
+	void setVersionOfOpenGL();
 
 public:
 

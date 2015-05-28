@@ -106,7 +106,7 @@ void PCRenderer::initialization()
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)
 {
-	setVersionOpenGLOnOSX();
+	setVersionOfOpenGL();
 
 	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 	setWindow(title, swapInterval);
@@ -115,20 +115,20 @@ void PCRenderer::createWindow(std::string title, int width, int height, int swap
 
 void PCRenderer::createWindow(std::string title, int swapInterval)
 {
-	setVersionOpenGLOnOSX();
+	setVersionOfOpenGL();
 
 	window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
 	setWindow(title, swapInterval);
 	compileDefaultShaderPrograms();
 }
 
-void PCRenderer::setVersionOpenGLOnOSX()
+void PCRenderer::setVersionOfOpenGL()
 {
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #if defined(OS_X)
-    	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-   		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     #endif
 }
 
