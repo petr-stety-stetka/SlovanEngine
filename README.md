@@ -6,9 +6,13 @@ It is still at an early stage of development and knoweth nothing :D
 **Actual version: 0.1 - WIP (Work In Progress).**
 
 ##Compilation
-```cmake SlovanEngine
+```
+cmake SlovanEngine
+
 make
-sudo make install```
+
+sudo make install
+```
 
 ##License
 Engine is under GNU GPLv3 license.
