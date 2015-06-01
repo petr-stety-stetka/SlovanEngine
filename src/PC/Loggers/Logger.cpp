@@ -3,15 +3,18 @@
 
 void Logger::printError(std::string text)
 {
-	std::cerr << "ERROR:   " << text << ";" << "\n";
+	std::string error("ERROR:   " + text + ";\n");
+	std::cerr << error;
 }
 
 void Logger::printWarning(std::string text)
 {
-	std::cout << "WARNING: " << text << ";" << "\n";
+	std::string warning("WARNING: " + text + ";\n");
+	std::cout << warning;
 }
 
 void Logger::printInfo(std::string text)
 {
-	std::cout << "INFO:    " << text << ";" << "\n";
+	std::string info("INFO:    " + text + ";\n");
+	std::cout << info;
 }
