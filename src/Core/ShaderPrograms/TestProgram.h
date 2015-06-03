@@ -8,7 +8,8 @@
 class TestProgram
 {
 private:
-	static GLint aVert;
+	static GLuint aVert;
+	static GLuint aColor;
 	static GLuint programID;
 public:
 	/**
@@ -24,6 +25,9 @@ public:
 	/** Delete this shader program. */
 	static void deleteShaderProgram();
 
-	/** Get ID vertex attribute: vert. For vertices */
-	static GLint getAVert();
+	/** Get ID vertex attribute: aVert. For vertices. */
+	static GLuint getAVert();
+
+	/** Get ID vertex attribute: aColor. For color. */
+	static GLuint getAColor();
 };

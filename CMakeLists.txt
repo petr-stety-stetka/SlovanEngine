@@ -16,7 +16,8 @@ src/Core/Shader/Shader.cpp
 src/PC/Renderer/PCRenderer.cpp
 src/PC/Loggers/Logger.cpp
 src/Core/ShaderPrograms/TestProgram.cpp
-src/Core/Data/VertexArrayObject.cpp)
+src/Core/VertexData/VertexArrayObject.cpp
+src/Core/Constants/Constants.cpp)
 
 add_library(slovanEngine STATIC ${SOURCE_FILES})
 

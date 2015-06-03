@@ -1,6 +1,7 @@
 #include <fstream>
 #include "Shader.h"
 #include "../Loggers/Logger.h"
+#include <vector>
 
 GLuint Shader::compileShader(GLenum type, std::string shaderCode)
 {
@@ -14,7 +15,14 @@ GLuint Shader::compileShader(GLenum type, std::string shaderCode)
 	GLint shaderOK;
 	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &shaderOK);
 	if(!shaderOK)
-		Logger::printError("Failed compile this shader:\n" + shaderCode);
+	{
+		GLint maxLength(0);
+		glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector <GLchar> log(maxLength);
+		glGetShaderInfoLog(shaderID, maxLength, &maxLength, &log[0]);
+		Logger::printError("Failed compile this shader:\n" + shaderCode + "\n" + std::string(log.begin(), log.end()));
+	}
 #endif
 
 	return shaderID;
@@ -60,8 +68,15 @@ GLuint Shader::createShaderProgram(std::string vertexShaderCode, std::string fra
 	glGetProgramiv(programID, GL_LINK_STATUS, &programOK);
 	if(!programOK)
 	{
+		GLint maxLength(0);
+		glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector <GLchar> log(maxLength);
+		glGetProgramInfoLog(programID, maxLength, &maxLength, &log[0]);
+
 		Logger::printError("Failed to link shader program, vertex shader code:\n" + vertexShaderCode +
-		                   "\nfragmnet shader code:\n" + fragmentShaderCode);
+				                   "\n\nfragmnet shader code:\n" + fragmentShaderCode + "\n\n" +
+				                   std::string(log.begin(), log.end()));
 	}
 #endif
 

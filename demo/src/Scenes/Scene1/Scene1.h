@@ -1,15 +1,31 @@
 #pragma once
 
 #include <SlovanEngine/Core/Scene/Scene.h>
-#include <SlovanEngine/Core/Data/VertexArrayObject.h>
+#include <SlovanEngine/Core/VertexData/VertexArrayObject.h>
 #include <SlovanEngine/Core/ShaderPrograms/TestProgram.h>
 #include <string>
 
 class Scene1 : public Scene
 {
 private:
-	GLfloat triangleVertexData[9];
-	GLfloat planeVertexData[18];
+	std::vector <GLfloat> triangleVertexData = {0.0f, 0.0f, 0.0f,
+	                                            0.0f, 0.0f, 1.0f,
+	                                            -0.8f, -0.8f, 0.0f,
+	                                            0.0f, 0.0f, 1.0f,
+	                                            0.8f, -0.8f, 0.0f,
+	                                            0.0f, 0.0f, 1.0f};
+	std::vector <GLfloat> planeVertexData = {-0.9f, 0.9f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f,
+	                                         -0.9f, 0.3f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f,
+	                                         0.9f, 0.9f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f,
+	                                         0.9f, 0.9f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f,
+	                                         -0.9f, 0.3f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f,
+	                                         0.9f, 0.3f, 0.0f,
+	                                         0.0f, 1.0f, 0.0f};
 	VertexArrayObject triangleVAO;
 	VertexArrayObject planeVAO;
 public:
