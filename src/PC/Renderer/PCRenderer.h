@@ -57,8 +57,11 @@ public:
 	/**
 	 * Initialization renderer.
 	 * The first method that should be called.
+	 *
+	 * @param UPSandIPS Are update loops (and input loops) per second.
+	 *                  Recommended value is 60 or 30.
 	 */
-	void initialization() override;
+	void initialization(short UPSandIPS) override;
 
 	/**
 	 * Create new fullscreen window.

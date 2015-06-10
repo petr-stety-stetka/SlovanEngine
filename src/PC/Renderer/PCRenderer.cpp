@@ -5,17 +5,17 @@
 #include <thread>
 #include <sstream>
 
-#define ONE_NANOSECOND 1000000000
+#define ONE_SECOND 1000000000
 
 GLFWwindow *PCRenderer::window;
-short Renderer::UPSandIPS(60);
+short Renderer::UPSandIPS(0);
 
 void PCRenderer::inputLoop()
 {
 	using namespace std::chrono;
 
 	FPSLogger IPSLogger;
-	nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
+	nanoseconds::rep nsPerFrame(ONE_SECOND / UPSandIPS);
 
 	while(runGameLoop && !glfwWindowShouldClose(window))
 	{
@@ -44,7 +44,7 @@ void PCRenderer::updateLoop()
 	using namespace std::chrono;
 
 	FPSLogger UPSLogger;
-	nanoseconds::rep nsPerFrame(ONE_NANOSECOND / UPSandIPS);
+	nanoseconds::rep nsPerFrame(ONE_SECOND / UPSandIPS);
 
 	while(runGameLoop && !glfwWindowShouldClose(window))
 	{
@@ -94,7 +94,7 @@ void PCRenderer::renderLoop()
 	}
 }
 
-void PCRenderer::initialization()
+void PCRenderer::initialization(short UPSandIPS)
 {
 	glfwSetErrorCallback(errorCallback);
 
@@ -102,6 +102,7 @@ void PCRenderer::initialization()
 	{
 		exit(EXIT_FAILURE);
 	}
+	Renderer::UPSandIPS = UPSandIPS;
 }
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)

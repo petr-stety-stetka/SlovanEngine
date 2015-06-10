@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
 	PCRenderer renderer;
-	renderer.initialization();
+	renderer.initialization(60);
 	renderer.createWindow("demo - Slovan Engine", 640, 480, 1);
 	Scene *firstScene = new Scene0;
 

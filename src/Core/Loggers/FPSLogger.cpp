@@ -1,7 +1,7 @@
 #include "FPSLogger.h"
 #include "Logger.h"
 
-#define ONE_NANOSECOND 1000000000
+#define ONE_SECOND 1000000000
 
 std::chrono::nanoseconds::rep FPSLogger::getActualTimeInNs()
 {
@@ -23,7 +23,7 @@ int FPSLogger::getFPS()
 void FPSLogger::logFrame(std::string text)
 {
 	FPS++;
-	if(getActualTimeInNs() - previousTime >= ONE_NANOSECOND)
+	if(getActualTimeInNs() - previousTime >= ONE_SECOND)
 	{
 		Logger::printInfo(text + ": " + std::to_string(FPS));
 		FPS = 0;
