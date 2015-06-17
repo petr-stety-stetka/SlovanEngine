@@ -9,15 +9,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pthread")
 set(SOURCE_FILES
 src/Core/Renderer/Renderer.cpp
 src/Core/Loggers/FPSLogger.cpp
-src/Core/Geometry/Vector.cpp
-src/Core/Geometry/Point2D.cpp
-src/Core/Geometry/Point3D.cpp
 src/Core/Shader/Shader.cpp
-src/PC/Renderer/PCRenderer.cpp
-src/PC/Loggers/Logger.cpp
+src/Core/Shader/Matrices.cpp
 src/Core/ShaderPrograms/TestProgram.cpp
 src/Core/VertexData/VertexArrayObject.cpp
-src/Core/Constants/Constants.cpp)
+src/Core/Constants/Constants.cpp
+src/Core/Objects/GameObject.cpp
+src/PC/Renderer/PCRenderer.cpp
+src/PC/Loggers/Logger.cpp)
 
 add_library(slovanEngine STATIC ${SOURCE_FILES})
 

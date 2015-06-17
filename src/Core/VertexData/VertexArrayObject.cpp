@@ -1,7 +1,6 @@
 #include "VertexArrayObject.h"
 
-VertexArrayObject::VertexArrayObject(std::vector <GLfloat> *vertices, std::vector <GLuint> attribute,
-                                     std::vector <GLuint> size)
+void VertexArrayObject::set(std::vector <GLfloat> *vertices, std::vector <GLuint> attribute, std::vector <GLuint> size)
 {
 	glGenVertexArrays(1, &VAOID);
 	glBindVertexArray(VAOID);
@@ -39,7 +38,7 @@ VertexArrayObject::VertexArrayObject(std::vector <GLfloat> *vertices, std::vecto
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-};
+}
 
 VertexArrayObject::~VertexArrayObject()
 {

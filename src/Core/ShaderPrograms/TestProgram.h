@@ -10,6 +10,7 @@ class TestProgram
 private:
 	static GLuint aVert;
 	static GLuint aColor;
+	static GLuint uMVPMatrix;
 	static GLuint programID;
 public:
 	/**
@@ -30,4 +31,7 @@ public:
 
 	/** Get ID vertex attribute: aColor. For color. */
 	static GLuint getAColor();
+
+	/** Get ID uniform: uMVPMatrix. For model+view+projection matrix. */
+	static GLuint getUMVPMatrix();
 };

@@ -20,3 +20,4 @@ Engine is under GNU GPLv3 license.
 ##Used library (thanks)
  - GLFW
  - GLEW
+ - GLM

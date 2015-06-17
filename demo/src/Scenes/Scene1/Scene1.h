@@ -4,6 +4,7 @@
 #include <SlovanEngine/Core/VertexData/VertexArrayObject.h>
 #include <SlovanEngine/Core/ShaderPrograms/TestProgram.h>
 #include <string>
+#include <SlovanEngine/Core/Objects/GameObject.h>
 
 class Scene1 : public Scene
 {
@@ -26,8 +27,9 @@ private:
 	                                         0.0f, 1.0f, 0.0f,
 	                                         0.9f, 0.3f, 0.0f,
 	                                         0.0f, 1.0f, 0.0f};
-	VertexArrayObject triangleVAO;
-	VertexArrayObject planeVAO;
+
+	GameObject triangle;
+	GameObject plane;
 public:
 	Scene1();
 
