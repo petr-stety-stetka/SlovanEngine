@@ -21,6 +21,9 @@ protected:
 	/** Deletes default shader programs. */
 	void deleteDefaultShaderPrograms();
 
+	static int width;
+	static int height;
+
 public:
 	/**
 	 * Initialization renderer.
@@ -55,4 +58,8 @@ public:
 	 * @param scene Pointer to new scene
 	 */
 	static void loadScene(Scene *scene);
+
+	static int getWidth();
+
+	static int getHeight();
 };

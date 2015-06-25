@@ -44,3 +44,10 @@ void Matrices::setMVPMatrix(const glm::mat4 &MVPMatrix)
 {
 	Matrices::MVPMatrix = MVPMatrix;
 }
+
+glm::mat4 Matrices::identity()
+{
+	glm::mat4 identityMatrix;
+	return identityMatrix;
+}
+

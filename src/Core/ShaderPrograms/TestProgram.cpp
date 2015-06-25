@@ -16,7 +16,8 @@ void TestProgram::draw(GLuint VAOID, int verticesCount)
 	glUseProgram(programID);
 	glBindVertexArray(VAOID);
 
-	Matrices::setMVPMatrix(Matrices::getModelMatrix() * Matrices::getViewMatrix() * Matrices::getProjectionMatrix());
+	Matrices::setMVPMatrix(Matrices::getProjectionMatrix() * Matrices::getViewMatrix() * Matrices::getModelMatrix());
+
 	glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(Matrices::getMVPMatrix()));
 
 	glDrawArrays(GL_TRIANGLES, 0, verticesCount);

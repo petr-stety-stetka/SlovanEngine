@@ -15,6 +15,7 @@ src/Core/ShaderPrograms/TestProgram.cpp
 src/Core/VertexData/VertexArrayObject.cpp
 src/Core/Constants/Constants.cpp
 src/Core/Objects/GameObject.cpp
+src/Core/Cameras/Camera.cpp
 src/PC/Renderer/PCRenderer.cpp
 src/PC/Loggers/Logger.cpp)
 

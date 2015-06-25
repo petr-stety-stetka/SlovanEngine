@@ -19,5 +19,5 @@ Engine is under GNU GPLv3 license.
 
 ##Used library (thanks)
  - GLFW
- - GLEW
- - GLM
+ - GLEW 
+ - GLM (version 0.9.6.3)

@@ -5,6 +5,9 @@ Scene *Renderer::actualScene = nullptr;
 
 bool Renderer::runGameLoop(true);
 
+int Renderer::width = 0;
+int Renderer::height = 0;
+
 void Renderer::setFirstScene(Scene *scene)
 {
 	loadScene(scene);
@@ -24,4 +27,14 @@ void Renderer::compileDefaultShaderPrograms()
 void Renderer::deleteDefaultShaderPrograms()
 {
 	TestProgram::deleteShaderProgram();
+}
+
+int Renderer::getWidth()
+{
+	return width;
+}
+
+int Renderer::getHeight()
+{
+	return height;
 }

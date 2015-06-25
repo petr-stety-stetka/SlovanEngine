@@ -30,4 +30,6 @@ public:
 	static const glm::mat4 &getMVPMatrix();
 
 	static void setMVPMatrix(const glm::mat4 &MVPMatrix);
+
+	static glm::mat4 identity();
 };
