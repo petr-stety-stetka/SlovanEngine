@@ -10,8 +10,6 @@ It is still at an early stage of development and knoweth nothing :D
 cmake SlovanEngine
 
 make
-
-sudo make install
 ```
 
 ##License

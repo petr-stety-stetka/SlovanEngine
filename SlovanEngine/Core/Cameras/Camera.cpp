@@ -1,8 +1,6 @@
 #include "Camera.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/matrix_access.hpp>
-
 #include "../Shader/Matrices.h"
 
 Camera::Camera(glm::vec3 position, glm::vec3 front)

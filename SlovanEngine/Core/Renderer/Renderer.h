@@ -15,13 +15,13 @@ protected:
 	/** Update loops (and input loops) per second. */
 	static short UPSandIPS;
 
-	/** Compiles default shader programs. */
-	void compileDefaultShaderPrograms();
+	/** Frames (draws) per second. */
+	static short FPS;
 
-	/** Deletes default shader programs. */
-	void deleteDefaultShaderPrograms();
-
+	/** Width of window - opengl surface in pixels. */
 	static int width;
+
+	/** Height of window - opengl surface in pixels. */
 	static int height;
 
 public:
@@ -31,8 +31,11 @@ public:
 	 *
 	 * @param UPSandIPS Are update loops (and input loops) per second.
 	 *                  Recommended value is 60 or 30.
+	 * @param FPS Frames per second. If this is 0, then FPS is unlimited or limited by VSync On/Off.
+	 *            If this is greater than 0, then FPS is limited on this value.
+	 *            If is VSync enabled, FPS must be 0!
 	 */
-	virtual void initialization(short UPSandIPS) = 0;
+	virtual void initialization(short UPSandIPS, short FPS) = 0;
 
 	/**
 	 * Run game loop.
@@ -59,7 +62,13 @@ public:
 	 */
 	static void loadScene(Scene *scene);
 
+	/**
+	 * Get width of window - opengl surface in px.
+	 */
 	static int getWidth();
 
+	/**
+	 * Get height of window - opengl surface in px.
+	 */
 	static int getHeight();
 };

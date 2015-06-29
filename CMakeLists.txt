@@ -7,33 +7,21 @@ add_definitions(-DADDITIONAL_LOG)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pthread")
 
 set(SOURCE_FILES
-src/Core/Renderer/Renderer.cpp
-src/Core/Loggers/FPSLogger.cpp
-src/Core/Shader/Shader.cpp
-src/Core/Shader/Matrices.cpp
-src/Core/ShaderPrograms/TestProgram.cpp
-src/Core/VertexData/VertexArrayObject.cpp
-src/Core/Constants/Constants.cpp
-src/Core/Objects/GameObject.cpp
-src/Core/Cameras/Camera.cpp
-src/PC/Renderer/PCRenderer.cpp
-src/PC/Loggers/Logger.cpp)
+SlovanEngine/Core/Renderer/Renderer.cpp
+SlovanEngine/Core/Loggers/FPSLogger.cpp
+SlovanEngine/Core/Shader/Shader.cpp
+SlovanEngine/Core/Shader/Matrices.cpp
+SlovanEngine/Core/ShaderPrograms/TestProgram.cpp
+SlovanEngine/Core/VertexData/VertexArrayObject.cpp
+SlovanEngine/Core/Constants/Constants.cpp
+SlovanEngine/Core/Objects/GameObject.cpp
+SlovanEngine/Core/Cameras/Camera.cpp
+SlovanEngine/PC/Renderer/PCRenderer.cpp
+SlovanEngine/PC/Loggers/Logger.cpp
+SlovanEngine/Core/ShaderPrograms/ShaderPrograms.cpp)
 
 add_library(slovanEngine STATIC ${SOURCE_FILES})
 
 target_link_libraries(slovanEngine ${LIBRARIES})
 
 add_subdirectory(demo)
-
-#install libslovanEngine.a
-install(TARGETS slovanEngine DESTINATION "lib")
-
-#install headers files
-install(DIRECTORY src/Core DESTINATION "include/SlovanEngine" FILES_MATCHING PATTERN "*.h")
-install(DIRECTORY src/PC DESTINATION "include/SlovanEngine" FILES_MATCHING PATTERN "*.h")
-
-#uninstall target
-configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-				"${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
-
-add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)

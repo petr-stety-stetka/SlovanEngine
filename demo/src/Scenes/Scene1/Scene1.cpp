@@ -1,16 +1,19 @@
 #include "Scene1.h"
-#include <SlovanEngine/Core/Renderer/Renderer.h>
-#include <SlovanEngine/Core/Constants/Constants.h>
+#include "../../../../SlovanEngine/Core/Renderer/Renderer.h"
+#include "../../../../SlovanEngine/Core/Constants/Constants.h"
 
 using namespace std;
 
 Scene1::Scene1()
 {
-	triangle.set(&triangleVertexData, vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
+	triangle.set(&triangleVertexData, ShaderPrograms::shaderPrograms::TestProgram,
+	             vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
 	             vector <GLuint>{Constants::POSITION_3D, Constants::COLOR_RGB}, 3);
-	plane.set(&planeVertexData, vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
+	plane.set(&planeVertexData, ShaderPrograms::shaderPrograms::TestProgram,
+	          vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
 	          vector <GLuint>{Constants::POSITION_3D, Constants::COLOR_RGB}, 6);
-	cube.set(&cubeVertexData, vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
+	cube.set(&cubeVertexData, ShaderPrograms::shaderPrograms::TestProgram,
+	         vector <GLuint>{TestProgram::getAVert(), TestProgram::getAColor()},
 	         vector <GLuint>{Constants::POSITION_3D, Constants::COLOR_RGB}, 36);
 
 	plane.setScale(glm::vec3(0.5f));

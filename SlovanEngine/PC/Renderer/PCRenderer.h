@@ -60,14 +60,19 @@ public:
 	 *
 	 * @param UPSandIPS Are update loops (and input loops) per second.
 	 *                  Recommended value is 60 or 30.
+	 * @param FPS Frames per second. If this is 0, then FPS is unlimited or limited by VSync On/Off.
+	 *            If this is greater than 0, then FPS is limited on this value.
+	 *            If is VSync enabled, FPS must be 0!
 	 */
-	void initialization(short UPSandIPS) override;
+	void initialization(short UPSandIPS, short FPS) override;
 
 	/**
 	 * Create new fullscreen window.
 	 *
 	 * @param title Title window.
 	 * @param swapInterval Minimum number of screen updates to wait for until the buffers are swapped.
+	 *                     If this is 1 VSync is enabled, if is 0 VSync is disabled.
+	 *                     If is VSync enabled, FPS must be 0!
 	 */
 	void createWindow(std::string title, int swapInterval);
 
@@ -78,6 +83,8 @@ public:
 	 * @param width Width of window in screen coordinates (mostly px).
 	 * @param height Height of window in screen coordinates (mostly px).
 	 * @param swapInterval Minimum number of screen updates to wait for until the buffers are swapped.
+	 *                     If this is 1 VSync is enabled, if this is 0 VSync is disabled.
+	 *                     If is VSync enabled, FPS must be 0!
 	 */
 	void createWindow(std::string title, int width, int height, int swapInterval);
 

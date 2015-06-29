@@ -1,6 +1,7 @@
 #include "PCRenderer.h"
 #include "../../Core/Loggers/FPSLogger.h"
 #include "../../Core/Loggers/Logger.h"
+#include "../../Core/ShaderPrograms/ShaderPrograms.h"
 #include <iostream>
 #include <thread>
 #include <sstream>
@@ -9,6 +10,7 @@
 
 GLFWwindow *PCRenderer::window;
 short Renderer::UPSandIPS(0);
+short Renderer::FPS(0);
 
 void PCRenderer::inputLoop()
 {
@@ -19,16 +21,16 @@ void PCRenderer::inputLoop()
 
 	while(runGameLoop && !glfwWindowShouldClose(window))
 	{
-		nanoseconds::rep startTime = getActualTimeInNs();
+		nanoseconds::rep startTime(getActualTimeInNs());
 
 		actualScene->input();
 
-		nanoseconds::rep endTime = getActualTimeInNs();
+		nanoseconds::rep endTime(getActualTimeInNs());
 
-		nanoseconds::rep updateTime = endTime - startTime;
-		nanoseconds::rep sleepTime = nsPerFrame - updateTime;
+		nanoseconds::rep inputTime(endTime - startTime);
+		nanoseconds::rep sleepTime(nsPerFrame - inputTime);
 
-		nanoseconds::rep nextFrame = startTime + nsPerFrame;
+		nanoseconds::rep nextFrame(startTime + nsPerFrame);
 
 		while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
 		{
@@ -48,16 +50,16 @@ void PCRenderer::updateLoop()
 
 	while(runGameLoop && !glfwWindowShouldClose(window))
 	{
-		nanoseconds::rep startTime = getActualTimeInNs();
+		nanoseconds::rep startTime(getActualTimeInNs());
 
 		actualScene->update();
 
-		nanoseconds::rep endTime = getActualTimeInNs();
+		nanoseconds::rep endTime(getActualTimeInNs());
 
-		nanoseconds::rep updateTime = endTime - startTime;
-		nanoseconds::rep sleepTime = nsPerFrame - updateTime;
+		nanoseconds::rep updateTime(endTime - startTime);
+		nanoseconds::rep sleepTime(nsPerFrame - updateTime);
 
-		nanoseconds::rep nextFrame = startTime + nsPerFrame;
+		nanoseconds::rep nextFrame(startTime + nsPerFrame);
 
 		while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
 		{
@@ -77,11 +79,23 @@ std::chrono::nanoseconds::rep PCRenderer::getActualTimeInNs()
 
 void PCRenderer::renderLoop()
 {
+	using namespace std::chrono;
+
 	FPSLogger FPSLogger;
+	nanoseconds::rep nsPerFrame;
+
+	if(FPS > 0)
+		nsPerFrame = ONE_SECOND / FPS;
+
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
 	while(runGameLoop && !glfwWindowShouldClose(window))
 	{
+		nanoseconds::rep startTime;
+		if(FPS > 0)
+			startTime = getActualTimeInNs();
+
 		glfwGetFramebufferSize(window, &width, &height);
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -91,11 +105,26 @@ void PCRenderer::renderLoop()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
+		if(FPS > 0)
+		{
+			nanoseconds::rep endTime(getActualTimeInNs());
+
+			nanoseconds::rep drawTime(endTime - startTime);
+			nanoseconds::rep sleepTime(nsPerFrame - drawTime);
+
+			nanoseconds::rep nextFrame(startTime + nsPerFrame);
+
+			while(sleepTime > 0 && getActualTimeInNs() + (sleepTime / 100) < nextFrame)
+			{
+				std::this_thread::sleep_for(nanoseconds(sleepTime / 100));
+			}
+		}
+
 		FPSLogger.logFrame("FPS");
 	}
 }
 
-void PCRenderer::initialization(short UPSandIPS)
+void PCRenderer::initialization(short UPSandIPS, short FPS)
 {
 	glfwSetErrorCallback(errorCallback);
 
@@ -104,6 +133,7 @@ void PCRenderer::initialization(short UPSandIPS)
 		exit(EXIT_FAILURE);
 	}
 	Renderer::UPSandIPS = UPSandIPS;
+	Renderer::FPS = FPS;
 }
 
 void PCRenderer::createWindow(std::string title, int width, int height, int swapInterval)
@@ -112,7 +142,7 @@ void PCRenderer::createWindow(std::string title, int width, int height, int swap
 
 	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 	setWindow(title, swapInterval);
-	compileDefaultShaderPrograms();
+	ShaderPrograms::compileShaderPrograms();
 }
 
 void PCRenderer::createWindow(std::string title, int swapInterval)
@@ -121,7 +151,7 @@ void PCRenderer::createWindow(std::string title, int swapInterval)
 
 	window = glfwCreateWindow(1366, 768, title.c_str(), glfwGetPrimaryMonitor(), NULL);
 	setWindow(title, swapInterval);
-	compileDefaultShaderPrograms();
+	ShaderPrograms::compileShaderPrograms();
 }
 
 void PCRenderer::setVersionOfOpenGL()
@@ -171,7 +201,7 @@ void PCRenderer::runLoop()
 void PCRenderer::terminate()
 {
 	delete actualScene;
-	deleteDefaultShaderPrograms();
+	ShaderPrograms::deleteShaderPrograms();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }

@@ -1,5 +1,4 @@
 #include "GameObject.h"
-#include "../ShaderPrograms/TestProgram.h"
 #include "../Shader/Matrices.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -12,11 +11,12 @@ GameObject::GameObject()
 	rotationPivot = glm::vec3(0.0f);
 }
 
-void GameObject::set(std::vector <GLfloat> *vertices, std::vector <GLuint> attribute, std::vector <GLuint> size,
-                     GLuint numberOfVertices)
+void GameObject::set(std::vector <GLfloat> *vertices, const ShaderPrograms::shaderPrograms shaderProgram,
+                     std::vector <GLuint> attribute, std::vector <GLuint> size, GLuint numberOfVertices)
 {
 	vertexData.set(vertices, attribute, size);
 	GameObject::numberOfVertices = numberOfVertices;
+	GameObject::shaderProgram = shaderProgram;
 }
 
 void GameObject::draw()
@@ -28,7 +28,12 @@ void GameObject::draw()
 	Matrices::setModelMatrix(glm::translate(Matrices::getModelMatrix(), rotationPivot));
 	Matrices::setModelMatrix(glm::scale(Matrices::getModelMatrix(), scale));
 
-	TestProgram::draw(vertexData.getID(), numberOfVertices);
+	switch(shaderProgram)
+	{
+		case ShaderPrograms::shaderPrograms::TestProgram:
+			TestProgram::draw(vertexData.getID(), numberOfVertices);
+	        break;
+	}
 }
 
 void GameObject::translate(glm::vec3 distance)
@@ -124,4 +129,15 @@ const glm::vec3 &GameObject::getRotationPivot() const
 void GameObject::setRotationPivot(const glm::vec3 &pivot)
 {
 	GameObject::rotationPivot = pivot;
+}
+
+
+const ShaderPrograms::shaderPrograms &GameObject::getShaderProgram() const
+{
+	return shaderProgram;
+}
+
+void GameObject::setShaderProgram(const ShaderPrograms::shaderPrograms &shaderProgram)
+{
+	GameObject::shaderProgram = shaderProgram;
 }

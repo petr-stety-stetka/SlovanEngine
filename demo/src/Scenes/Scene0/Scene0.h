@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SlovanEngine/Core/Scene/Scene.h>
+#include "../../../../SlovanEngine/Core/Scene/Scene.h"
 
 class Scene0 : public Scene
 {

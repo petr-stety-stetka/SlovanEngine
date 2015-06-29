@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../VertexData/VertexArrayObject.h"
-
 #define GLM_FORCE_RADIANS
 #include <glm/vec3.hpp>
 #include "../GL/GLHeader.h"
+#include "../ShaderPrograms/ShaderPrograms.h"
 #include <glm/gtc/quaternion.hpp>
 
 /**
@@ -19,6 +19,7 @@ private:
 	glm::vec3 rotationPivot;
 	VertexArrayObject vertexData;
 	GLuint numberOfVertices;
+	ShaderPrograms::shaderPrograms shaderProgram;
 
 public:
 
@@ -28,11 +29,15 @@ public:
 	GameObject();
 
 	/**
-	 * Set GameObject - vertices, shader program attributes, array of vertices size, numberOfVertices.
+	 * Set GameObject - vertices, shader program (used for draw), shader program attributes, array of vertices size,
+	 *                  number of vertices.
 	 */
-	void set(std::vector <GLfloat> *vertices, std::vector <GLuint> attribute, std::vector <GLuint> size,
-	         GLuint numberOfVertices);
+	void set(std::vector <GLfloat> *vertices, const ShaderPrograms::shaderPrograms shaderProgram,
+	         std::vector <GLuint> attribute, std::vector <GLuint> size, GLuint numberOfVertices);
 
+	/**
+	 * Render GameObject.
+	 */
 	void draw();
 
 	/**
@@ -130,4 +135,14 @@ public:
 	 * (Default is center of GameObject = 0.0, 0.0, 0.0)
 	 */
 	void setRotationPivot(const glm::vec3 &pivot);
+
+	/**
+	 * Get shader program used for draw this GameObjects.
+	 */
+	const ShaderPrograms::shaderPrograms &getShaderProgram() const;
+
+	/**
+	 * Set shader program used for draw this GameObjects.
+	 */
+	void setShaderProgram(const ShaderPrograms::shaderPrograms &shaderProgram);
 };
