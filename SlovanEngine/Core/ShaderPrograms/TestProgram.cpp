@@ -4,7 +4,7 @@
 
 #define GLM_FORCE_RADIANS
 
-#include <glm/gtc/type_ptr.hpp>
+#include "../../../external/glm/gtc/type_ptr.hpp"
 
 GLuint TestProgram::aVert;
 GLuint TestProgram::aColor;
@@ -17,7 +17,6 @@ void TestProgram::draw(GLuint VAOID, int verticesCount)
 	glBindVertexArray(VAOID);
 
 	Matrices::setMVPMatrix(Matrices::getProjectionMatrix() * Matrices::getViewMatrix() * Matrices::getModelMatrix());
-
 	glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(Matrices::getMVPMatrix()));
 
 	glDrawArrays(GL_TRIANGLES, 0, verticesCount);

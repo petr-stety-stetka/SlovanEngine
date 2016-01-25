@@ -1,3 +1,5 @@
 In directory Core is shared source for all platforms (Android, PC).
-In Android is specified code for Android.
-In PC is specified code for PC.
+In directory Android is specified code for Android.
+In directory PC is specified code for PC.
+In directory external are precompiled libs, headers and source of libraries.
+In directory demo is reference app/game.

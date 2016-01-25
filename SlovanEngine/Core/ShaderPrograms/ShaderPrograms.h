@@ -1,7 +1,5 @@
 #pragma once
 
-#include "TestProgram.h"
-
 class ShaderPrograms
 {
 public:
@@ -10,7 +8,8 @@ public:
 	 */
 	enum class shaderPrograms
 	{
-		TestProgram
+		TestProgram,
+		AssimpProgram
 	};
 
 	/** Compiles shader programs. */

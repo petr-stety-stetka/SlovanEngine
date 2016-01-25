@@ -1,8 +1,8 @@
 #include "GameObject.h"
 #include "../Shader/Matrices.h"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/quaternion.hpp>
-#include <glm/gtx/euler_angles.hpp>
+#include "../../../external/glm/gtc/matrix_transform.hpp"
+#include "../../../external/glm/gtx/quaternion.hpp"
+#include "../../../external/glm/gtx/euler_angles.hpp"
 
 GameObject::GameObject()
 {
@@ -11,12 +11,11 @@ GameObject::GameObject()
 	rotationPivot = glm::vec3(0.0f);
 }
 
-void GameObject::set(std::vector <GLfloat> *vertices, const ShaderPrograms::shaderPrograms shaderProgram,
-                     std::vector <GLuint> attribute, std::vector <GLuint> size, GLuint numberOfVertices)
+void GameObject::setModel(std::string name)
 {
-	vertexData.set(vertices, attribute, size);
-	GameObject::numberOfVertices = numberOfVertices;
-	GameObject::shaderProgram = shaderProgram;
+	shaderProgram = ShaderPrograms::shaderPrograms::AssimpProgram;
+	name = "Resources/models/" + name;
+	model.loadModel(&name);
 }
 
 void GameObject::draw()
@@ -28,12 +27,7 @@ void GameObject::draw()
 	Matrices::setModelMatrix(glm::translate(Matrices::getModelMatrix(), rotationPivot));
 	Matrices::setModelMatrix(glm::scale(Matrices::getModelMatrix(), scale));
 
-	switch(shaderProgram)
-	{
-		case ShaderPrograms::shaderPrograms::TestProgram:
-			TestProgram::draw(vertexData.getID(), numberOfVertices);
-	        break;
-	}
+	model.draw(&shaderProgram);
 }
 
 void GameObject::translate(glm::vec3 distance)
@@ -92,13 +86,13 @@ void GameObject::setRotationGlobal(const glm::quat &quaternion)
 void GameObject::setRotationLocal(const glm::vec3 eulerAngles)
 {
 	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
-	this->rotation = glm::quat(eulerAnglesInRadians);
+	GameObject::rotation = glm::quat(eulerAnglesInRadians);
 }
 
 void GameObject::setRotationGlobal(const glm::vec3 eulerAngles)
 {
 	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
-	this->rotation = glm::quat(eulerAnglesInRadians);
+	GameObject::rotation = glm::quat(eulerAnglesInRadians);
 }
 
 const glm::vec3 &GameObject::getPosition() const

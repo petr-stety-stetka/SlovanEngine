@@ -5,12 +5,13 @@ int main(int argc, char *argv[])
 {
 	PCRenderer renderer;
 	/** Enabled can be only one - vSync or FPS! */
-	int vSync(1);
-	short UPSandIPS(60);
-	short FPS(0);
+	int vSync(0);
+	short UPS(60);
+	short FPS(60);
 
-	renderer.initialization(UPSandIPS, FPS);
-	renderer.createWindow("demo - Slovan Engine", 640, 480, vSync);
+	renderer.initialization(UPS, FPS);
+	renderer.createWindow("demo - Slovan Engine", 800, 600, vSync);
+	//renderer.createWindow("demo - Slovan Engine", vSync);
 	Scene *firstScene = new Scene0;
 
 	renderer.setFirstScene(firstScene);

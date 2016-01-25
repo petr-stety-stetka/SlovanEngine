@@ -1,9 +1,9 @@
 # Slovan Engine
-Is OpenGL | ES engine for creation game. It supports Linux, Mac, Windows and Android (in future).<br>
-Currently only tested on Linux.<br>
+Is OpenGL | ES engine for creation game. It supports Linux, Mac, Windows and Android.<br>
+Currently only tested on Linux and Android (maybe :D).<br>
 It is still at an early stage of development and knoweth nothing :D
 
-**Actual version: 0.1 - WIP (Work In Progress).**
+**Actual version: 0.2**
 
 ##Compilation
 ```
@@ -18,4 +18,6 @@ Engine is under GNU GPLv3 license.
 ##Used library (thanks)
  - GLFW
  - GLEW 
- - GLM (version 0.9.6.3)
+ - GLM
+ - SOIL2
+ - ASSIMP

@@ -9,10 +9,14 @@ std::chrono::nanoseconds::rep FPSLogger::getActualTimeInNs()
 	return duration_cast <nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
 }
 
+void FPSLogger::init() {
+	previousTime = getActualTimeInNs();
+}
+
 FPSLogger::FPSLogger()
 {
 	FPS = 0;
-	previousTime = getActualTimeInNs();
+	//previousTime = getActualTimeInNs();
 }
 
 int FPSLogger::getFPS()

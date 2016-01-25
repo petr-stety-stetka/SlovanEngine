@@ -23,6 +23,8 @@ public:
 
 	FPSLogger();
 
+	void init();
+
 	/** Write (log) number frames (FPS) with specific text */
 	void logFrame(std::string text);
 

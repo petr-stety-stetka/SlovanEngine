@@ -2,8 +2,9 @@
 
 Scene *Renderer::actualScene = nullptr;
 
-bool Renderer::runGameLoop(true);
-
+bool Renderer::runGameLoop(false);
+short Renderer::UPS(0);
+short Renderer::FPS(0);
 int Renderer::width = 0;
 int Renderer::height = 0;
 

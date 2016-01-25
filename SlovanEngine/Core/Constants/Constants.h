@@ -5,12 +5,11 @@
 class Constants
 {
 public:
-	static const GLbyte POSITION_3D;
-	static const GLbyte POSITION_2D;
-	static const GLbyte COLOR_RGBA;
-	static const GLbyte COLOR_RGB;
-	static const GLbyte NORMAL_3D;
-	static const GLbyte TEXTURE_2D_COORDINATE;
-
+	static const GLuint POSITION_3D;
+	static const GLuint POSITION_2D;
+	static const GLuint COLOR_RGBA;
+	static const GLuint COLOR_RGB;
+	static const GLuint NORMAL_3D;
+	static const GLuint TEXTURE_2D_COORDINATE;
 };
 

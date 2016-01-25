@@ -4,6 +4,8 @@
 #include <string>
 #include <chrono>
 #include "../../Core/Renderer/Renderer.h"
+#include "../Input/Keyboard.h"
+#include "../Input/Mouse.h"
 
 class PCRenderer : public Renderer
 {
@@ -13,6 +15,16 @@ private:
 	 * GLFW Window.
 	 */
 	static GLFWwindow *window;
+
+	/**
+	 * Keyboard.
+	 */
+	static Keyboard keyboard;
+
+	/**
+	 * Mouse.
+	 */
+	static Mouse mouse;
 
 	/**
 	 * Set Window title and swap interval.
@@ -26,11 +38,6 @@ private:
 	 * Error callback to GLFW.
 	 */
 	static void errorCallback(int error, const char *description);
-
-	/**
-	 * Input loop for all input. Here you mustn't call OpenGL function!
-	 */
-	static void inputLoop();
 
 	/**
 	 * Update loop for update state objects. Here you mustn't call OpenGL function!
@@ -52,6 +59,31 @@ private:
 	/** Set the required version of OpenGL*/
 	void setVersionOfOpenGL();
 
+	/**
+	 * Set all callbacks to GLFW.
+	 */
+	void setCallbacks();
+
+	/**
+	 * Set mouse scroll callback to GLFW.
+	 */
+	static void mouseScrollCallback(GLFWwindow *window, double xoffset, double yoffset);
+
+	/**
+	 * Set mouse position callback to GLFW.
+	 */
+	static void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
+
+	/**
+	 * Set mouse button callback to GLFW.
+	 */
+	static void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+
+	/**
+	 * Set keyboard callback to GLFW.
+	 */
+	static void KeyboardCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+
 public:
 
 	/**
@@ -64,7 +96,7 @@ public:
 	 *            If this is greater than 0, then FPS is limited on this value.
 	 *            If is VSync enabled, FPS must be 0!
 	 */
-	void initialization(short UPSandIPS, short FPS) override;
+	void initialization(short UPS, short FPS) override;
 
 	/**
 	 * Create new fullscreen window.
@@ -87,6 +119,11 @@ public:
 	 *                     If is VSync enabled, FPS must be 0!
 	 */
 	void createWindow(std::string title, int width, int height, int swapInterval);
+
+	/**
+	 * Return GLFW window.
+	 */
+	static GLFWwindow *getWindow();
 
 	/**
 	 * Run game loop.

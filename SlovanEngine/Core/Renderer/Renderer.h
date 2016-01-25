@@ -13,7 +13,7 @@ protected:
 	static bool runGameLoop;
 
 	/** Update loops (and input loops) per second. */
-	static short UPSandIPS;
+	static short UPS;
 
 	/** Frames (draws) per second. */
 	static short FPS;

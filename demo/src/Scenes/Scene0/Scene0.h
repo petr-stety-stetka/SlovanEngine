@@ -9,7 +9,5 @@ private:
 public:
 	void render() override;
 
-	void input() override;
-
 	void update() override;
 };
