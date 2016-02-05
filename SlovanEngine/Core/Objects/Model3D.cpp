@@ -1,24 +1,24 @@
-#include "GameObject.h"
+#include "Model3D.h"
 #include "../Shader/Matrices.h"
 #include "../../../external/glm/gtc/matrix_transform.hpp"
 #include "../../../external/glm/gtx/quaternion.hpp"
 #include "../../../external/glm/gtx/euler_angles.hpp"
 
-GameObject::GameObject()
+Model3D::Model3D()
 {
 	position = glm::vec3(0.0f);
 	scale = glm::vec3(1.0f);
 	rotationPivot = glm::vec3(0.0f);
 }
 
-void GameObject::setModel(std::string name)
+void Model3D::setModel(std::string name)
 {
 	shaderProgram = ShaderPrograms::shaderPrograms::AssimpProgram;
 	name = "Resources/models/" + name;
 	model.loadModel(&name);
 }
 
-void GameObject::draw()
+void Model3D::draw()
 {
 	Matrices::setModelMatrix(Matrices::identity());
 
@@ -30,108 +30,108 @@ void GameObject::draw()
 	model.draw(&shaderProgram);
 }
 
-void GameObject::translate(glm::vec3 distance)
+void Model3D::translate(glm::vec3 distance)
 {
 	position = position + distance;
 }
 
-void GameObject::scaleUp(glm::vec3 scaleFactor)
+void Model3D::scaleUp(glm::vec3 scaleFactor)
 {
 	scale = scale + scaleFactor;
 }
 
-void GameObject::rotateLocal(glm::quat quaternion)
+void Model3D::rotateLocal(glm::quat quaternion)
 {
 	rotation = rotation * quaternion;
 }
 
-void GameObject::rotateGlobal(glm::quat quaternion)
+void Model3D::rotateGlobal(glm::quat quaternion)
 {
 	rotation = quaternion * rotation;
 }
 
-void GameObject::rotateLocal(glm::vec3 eulerAngles)
+void Model3D::rotateLocal(glm::vec3 eulerAngles)
 {
 	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
 	rotation = rotation * glm::quat(eulerAnglesInRadians);
 }
 
-void GameObject::rotateGlobal(glm::vec3 eulerAngles)
+void Model3D::rotateGlobal(glm::vec3 eulerAngles)
 {
 	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
 	rotation = glm::quat(eulerAnglesInRadians) * rotation;
 }
 
-const glm::quat &GameObject::getRotation() const
+const glm::quat &Model3D::getRotation() const
 {
 	return rotation;
 }
 
-const glm::vec3 GameObject::getRotation()
+const glm::vec3 Model3D::getRotation()
 {
 	glm::vec3 eulerAngles = glm::eulerAngles(rotation);
 	return glm::vec3(glm::degrees(eulerAngles));
 }
 
-void GameObject::setRotationLocal(const glm::quat &quaternion)
+void Model3D::setRotationLocal(const glm::quat &quaternion)
 {
-	GameObject::rotation = quaternion;
+	Model3D::rotation = quaternion;
 }
 
-void GameObject::setRotationGlobal(const glm::quat &quaternion)
+void Model3D::setRotationGlobal(const glm::quat &quaternion)
 {
-	GameObject::rotation = quaternion;
+	Model3D::rotation = quaternion;
 }
 
-void GameObject::setRotationLocal(const glm::vec3 eulerAngles)
-{
-	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
-	GameObject::rotation = glm::quat(eulerAnglesInRadians);
-}
-
-void GameObject::setRotationGlobal(const glm::vec3 eulerAngles)
+void Model3D::setRotationLocal(const glm::vec3 eulerAngles)
 {
 	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
-	GameObject::rotation = glm::quat(eulerAnglesInRadians);
+	Model3D::rotation = glm::quat(eulerAnglesInRadians);
 }
 
-const glm::vec3 &GameObject::getPosition() const
+void Model3D::setRotationGlobal(const glm::vec3 eulerAngles)
+{
+	glm::vec3 eulerAnglesInRadians(glm::radians(eulerAngles));
+	Model3D::rotation = glm::quat(eulerAnglesInRadians);
+}
+
+const glm::vec3 &Model3D::getPosition() const
 {
 	return position;
 }
 
-void GameObject::setPosition(const glm::vec3 &position)
+void Model3D::setPosition(const glm::vec3 &position)
 {
-	GameObject::position = position;
+	Model3D::position = position;
 }
 
-const glm::vec3 &GameObject::getScale() const
+const glm::vec3 &Model3D::getScale() const
 {
 	return scale;
 }
 
-void GameObject::setScale(const glm::vec3 &scale)
+void Model3D::setScale(const glm::vec3 &scale)
 {
-	GameObject::scale = scale;
+	Model3D::scale = scale;
 }
 
-const glm::vec3 &GameObject::getRotationPivot() const
+const glm::vec3 &Model3D::getRotationPivot() const
 {
 	return rotationPivot;
 }
 
-void GameObject::setRotationPivot(const glm::vec3 &pivot)
+void Model3D::setRotationPivot(const glm::vec3 &pivot)
 {
-	GameObject::rotationPivot = pivot;
+	Model3D::rotationPivot = pivot;
 }
 
 
-const ShaderPrograms::shaderPrograms &GameObject::getShaderProgram() const
+const ShaderPrograms::shaderPrograms &Model3D::getShaderProgram() const
 {
 	return shaderProgram;
 }
 
-void GameObject::setShaderProgram(const ShaderPrograms::shaderPrograms &shaderProgram)
+void Model3D::setShaderProgram(const ShaderPrograms::shaderPrograms &shaderProgram)
 {
-	GameObject::shaderProgram = shaderProgram;
+	Model3D::shaderProgram = shaderProgram;
 }

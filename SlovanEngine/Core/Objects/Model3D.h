@@ -12,7 +12,7 @@
 /**
  * Game Object.
  */
-class GameObject
+class Model3D
 {
 private:
 	glm::vec3 position;
@@ -25,45 +25,45 @@ private:
 public:
 
 	/**
-	 * Create GameObject.
+	 * Create Model3D.
 	 */
-	GameObject();
+	Model3D();
 
 	void setModel(std::string name);
 
 	/**
-	 * Render GameObject.
+	 * Render Model3D.
 	 */
 	void draw();
 
 	/**
-	 * Translate GameObject position to some place. Call this function in update().
+	 * Translate Model3D position to some place. Call this function in update().
 	 */
 	void translate(glm::vec3 distance);
 
 	/**
-	 * Scale up GameObject by scaleFactor. Call this function in update().
+	 * Scale up Model3D by scaleFactor. Call this function in update().
 	 */
 	void scaleUp(glm::vec3 scaleFactor);
 
 	/**
-	 * Rotate GameObject by local axis in quaternions. Call this function in update().
+	 * Rotate Model3D by local axis in quaternions. Call this function in update().
 	 */
 	void rotateLocal(glm::quat quaternion);
 
 	/**
-	 * Rotate GameObject by global axis in quaternions. Call this function in update().
+	 * Rotate Model3D by global axis in quaternions. Call this function in update().
 	 */
 	void rotateGlobal(glm::quat quaternion);
 
 	/**
-	 * Rotate GameObject by local axis in euler angles, in degrees.
+	 * Rotate Model3D by local axis in euler angles, in degrees.
 	 * Order angles is XYZ! Call this function in update().
 	 */
 	void rotateLocal(glm::vec3 eulerAngle);
 
 	/**
-	 * Rotate GameObject by global axis in euler angles, in degrees.
+	 * Rotate Model3D by global axis in euler angles, in degrees.
 	 * Order angles is XYZ! Call this function in update().
 	 */
 	void rotateGlobal(glm::vec3 eulerAngles);
@@ -122,13 +122,13 @@ public:
 
 	/**
 	 * Return pivot of rotation. Pivot is in local position, no global.
-	 * (Default is center of GameObject = 0.0, 0.0, 0.0)
+	 * (Default is center of Model3D = 0.0, 0.0, 0.0)
 	 */
 	const glm::vec3 &getRotationPivot() const;
 
 	/**
 	 * Set pivot of rotation. Pivot is in local position, no global.
-	 * (Default is center of GameObject = 0.0, 0.0, 0.0)
+	 * (Default is center of Model3D = 0.0, 0.0, 0.0)
 	 */
 	void setRotationPivot(const glm::vec3 &pivot);
 

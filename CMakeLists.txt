@@ -16,7 +16,7 @@ set(SOURCE_FILES
         SlovanEngine/Core/ShaderPrograms/TestProgram.cpp
         SlovanEngine/Core/VertexData/VertexArrayObject.cpp
         SlovanEngine/Core/Constants/Constants.cpp
-        SlovanEngine/Core/Objects/GameObjectOld.cpp
+        SlovanEngine/Core/GraphicModels/BasicGeometryShape.cpp
         SlovanEngine/Core/Cameras/Camera.cpp
         SlovanEngine/PC/Renderer/PCRenderer.cpp
         SlovanEngine/PC/Loggers/Logger.cpp
@@ -24,13 +24,17 @@ set(SOURCE_FILES
         SlovanEngine/Core/GraphicModels/Mesh.cpp
         SlovanEngine/Core/GraphicModels/Model.cpp
         SlovanEngine/Core/ShaderPrograms/AssimpProgram.cpp
-        SlovanEngine/Core/Objects/GameObject.cpp
+        SlovanEngine/Core/Objects/Model3D.cpp
         SlovanEngine/Core/GraphicModels/Texture.cpp
         SlovanEngine/PC/Input/Keyboard.cpp
         SlovanEngine/PC/Input/Mouse.cpp
         SlovanEngine/Core/Cameras/FPSCamera.cpp
         SlovanEngine/Core/Cameras/Camera.cpp
-        SlovanEngine/Core/Cameras/Camera2D.cpp)
+        SlovanEngine/Core/Cameras/Camera2D.cpp
+        #SlovanEngine/Core/Objects/Texture2D.cpp
+        #SlovanEngine/Core/Objects/Texture2D.h
+        SlovanEngine/Core/Objects/Model3D.cpp
+        SlovanEngine/Core/Objects/Model3D.h SlovanEngine/Core/Objects/Texture3D.cpp SlovanEngine/Core/Objects/Texture3D.h)
 
 add_library(slovanEngine STATIC ${SOURCE_FILES})
 add_subdirectory(demo)
