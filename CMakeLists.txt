@@ -34,7 +34,10 @@ set(SOURCE_FILES
         #SlovanEngine/Core/Objects/Texture2D.cpp
         #SlovanEngine/Core/Objects/Texture2D.h
         SlovanEngine/Core/Objects/Model3D.cpp
-        SlovanEngine/Core/Objects/Model3D.h SlovanEngine/Core/Objects/Texture3D.cpp SlovanEngine/Core/Objects/Texture3D.h)
+        SlovanEngine/Core/Objects/Model3D.h
+        #SlovanEngine/Core/Objects/Texture3D.cpp
+        #SlovanEngine/Core/Objects/Texture3D.h
+        )
 
 add_library(slovanEngine STATIC ${SOURCE_FILES})
 add_subdirectory(demo)
