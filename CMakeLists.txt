@@ -4,6 +4,7 @@ project(SlovanEngine)
 add_definitions(-DPC)
 add_definitions(-DADDITIONAL_LOG)
 #add_definitions(-DGLOB_MEASURE_TIME=1)
+add_definitions(-DGLEW_STATIC)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pthread")
 
